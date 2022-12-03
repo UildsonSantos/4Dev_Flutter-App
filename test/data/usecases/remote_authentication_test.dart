@@ -27,7 +27,6 @@ void main() {
   test(
     'should call HttpClient with correct method',
     () async {
-
       // act
       await sut.auth(params);
 
@@ -58,13 +57,29 @@ void main() {
 
   test(
     'should throw UnexpectedError if HttpClient returns 404',
-        () async {
+    () async {
       when(
         httpClient.request(
             url: anyNamed('url'),
             method: anyNamed('method'),
             body: anyNamed('body')),
       ).thenThrow(HttpError.notFound);
+
+      final future = sut.auth(params);
+
+      expect(future, throwsA(DomainError.unexpected));
+    },
+  );
+
+  test(
+    'should throw UnexpectedError if HttpClient returns 500',
+    () async {
+      when(
+        httpClient.request(
+            url: anyNamed('url'),
+            method: anyNamed('method'),
+            body: anyNamed('body')),
+      ).thenThrow(HttpError.serverError);
 
       final future = sut.auth(params);
 
