@@ -125,14 +125,13 @@ void main() {
             body: anyNamed('body')),
       ).thenAnswer(
         (_) async => {
-          'accessToken': accessToken,
-          'name': faker.person.name(),
+          'invalid_key': 'invalid_value',
         },
       );
 
-      final account = await sut.auth(params);
+      final future = sut.auth(params);
 
-      expect(account.token, accessToken);
+      expect(future, throwsA(DomainError.unexpected));
     },
   );
 }
