@@ -11,7 +11,7 @@ class App extends StatelessWidget {
     final primaryColor = Color.fromRGBO(136, 14, 79, 1);
     final primaryColorDark = Color.fromRGBO(96, 0, 39, 1);
     final primaryColorLight = Color.fromRGBO(188, 71, 123, 1);
-    
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -47,7 +47,7 @@ class App extends StatelessWidget {
         ),
       ),
       title: '4Dev',
-      home: LoginPage(),
+      home: LoginPage(null),
     );
   }
 }
