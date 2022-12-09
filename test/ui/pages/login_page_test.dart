@@ -45,35 +45,34 @@ void main() {
     isLoadingController.close();
   });
 
-  testWidgets(
-    'should load with correct initial state',
-    (WidgetTester tester) async {
-      await loadPage(tester);
+  testWidgets('should load with correct initial state',
+      (WidgetTester tester) async {
+    await loadPage(tester);
 
-      final emailTextChildren = find.descendant(
-          of: find.bySemanticsLabel('Email'), matching: find.byType(Text));
+    final emailTextChildren = find.descendant(
+        of: find.bySemanticsLabel('Email'), matching: find.byType(Text));
 
-      expect(
-        emailTextChildren,
-        findsOneWidget,
-        reason: '''when a TextFormField has only one text child, means it has 
+    expect(
+      emailTextChildren,
+      findsOneWidget,
+      reason: '''when a TextFormField has only one text child, means it has 
             no errors, since one of the childs is always the label text''',
-      );
+    );
 
-      final passwordTextChildren = find.descendant(
-          of: find.bySemanticsLabel('Senha'), matching: find.byType(Text));
+    final passwordTextChildren = find.descendant(
+        of: find.bySemanticsLabel('Senha'), matching: find.byType(Text));
 
-      expect(
-        passwordTextChildren,
-        findsOneWidget,
-        reason: '''when a TextFormField has only one text child, means it has 
+    expect(
+      passwordTextChildren,
+      findsOneWidget,
+      reason: '''when a TextFormField has only one text child, means it has 
             no errors, since one of the childs is always the label text''',
-      );
+    );
 
-      final button = tester.widget<RaisedButton>(find.byType(RaisedButton));
-      expect(button.onPressed, null);
-    },
-  );
+    final button = tester.widget<RaisedButton>(find.byType(RaisedButton));
+    expect(button.onPressed, null);
+    expect(find.byType(CircularProgressIndicator), findsNothing);
+  });
 
   testWidgets('should call validate with correct values',
       (WidgetTester tester) async {
@@ -203,5 +202,17 @@ void main() {
     await tester.pump();
 
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
+  });
+
+  testWidgets('should hide loading',
+      (WidgetTester tester) async {
+    await loadPage(tester);
+
+    isLoadingController.add(true);
+    await tester.pump();
+    isLoadingController.add(false);
+    await tester.pump();
+
+    expect(find.byType(CircularProgressIndicator), findsNothing);
   });
 }
