@@ -18,32 +18,16 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
     widget.presenter.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Builder(builder: (context) {
         widget.presenter.isLoadingController.listen((isLoading) {
           if (isLoading) {
-            showDialog(
-              context: context,
-              barrierDismissible: false,
-              child: SimpleDialog(
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircularProgressIndicator(),
-                      SizedBox(height: 10),
-                      Text('Aguarde... ', textAlign: TextAlign.center)
-                    ],
-                  )
-                ],
-              ),
-            );
+            showLoading(context);
           } else {
-            if (Navigator.canPop(context)) {
-              Navigator.of(context).pop();
-            }
+            hideLoading(context);
           }
         });
 
@@ -112,8 +96,9 @@ class _LoginPageState extends State<LoginPage> {
                           stream: widget.presenter.isFormValidStream,
                           builder: (context, snapshot) {
                             return RaisedButton(
-                              onPressed:
-                                  snapshot.data == true ? widget.presenter.auth : null,
+                              onPressed: snapshot.data == true
+                                  ? widget.presenter.auth
+                                  : null,
                               child: Text(
                                 'Entrar'.toUpperCase(),
                               ),
