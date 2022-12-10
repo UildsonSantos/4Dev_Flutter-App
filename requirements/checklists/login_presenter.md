@@ -3,7 +3,7 @@
 > ## Regras
 
 
-1. Chamar Validation ao alterar o email
+1. ✅ Chamar Validation ao alterar o email
 2. Notificar o emailErrorStream com o mesmo erro do Validation, caso retorne erro
 3. Notificar o emailErrorStream com null, caso o Validation não retorne erro
 4. Não notificar o emailErrorStream se o valor for igual ao último
@@ -22,3 +22,4 @@
 17. Fechar todos os Streams no dispose
 18. ⛔️ Gravar o Account no cache em caso de sucesso
 19. ⛔️ Levar o usuário pra tela de Enquetes em caso de sucesso
+ 
