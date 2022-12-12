@@ -30,4 +30,10 @@ void main() {
 
     expect(error, null);
   });
+
+  test('should return null if email is valid', () {
+    final error = sut.validate('occursum.o@gmail.com');
+
+    expect(error, null);
+  });
 }
