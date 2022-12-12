@@ -16,17 +16,19 @@ class RequiredFieldValidation implements FieldValidation {
 }
 
 void main() {
-  test('should return null if value is not empty', () async {
-    final sut = RequiredFieldValidation('any_field');
+  RequiredFieldValidation sut;
 
+  setUp(() {
+    sut = RequiredFieldValidation('any_field');
+  });
+
+  test('should return null if value is not empty', () async {
     final error = sut.validate('any_value');
 
     expect(error, null);
   });
 
   test('should return error if value is empty', () async {
-    final sut = RequiredFieldValidation('any_field');
-
     final error = sut.validate('');
 
     expect(error, 'Campo obrigatório');
