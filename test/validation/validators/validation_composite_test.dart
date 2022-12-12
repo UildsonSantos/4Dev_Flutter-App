@@ -1,9 +1,9 @@
-import 'package:fordev/validation/protocols/protocols.dart';
 import 'package:meta/meta.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import 'package:fordev/presentation/protocols/validation.dart';
+import 'package:fordev/validation/protocols/protocols.dart';
+import 'package:fordev/presentation/protocols/protocols.dart';
 
 class ValidationComposite implements Validation {
   final List<FieldValidation> validations;
@@ -12,7 +12,8 @@ class ValidationComposite implements Validation {
 
   String validate({@required String field, @required String value}) {
     String error;
-    for (final validation in validations) {
+    for (final validation
+        in validations.where((inValidation) => inValidation.field == field)) {
       error = validation.validate(value);
       if (error?.isNotEmpty == true) {
         return error;
@@ -44,7 +45,7 @@ void main() {
 
   setUp(() {
     validation1 = FieldValidationSpy();
-    when(validation1.field).thenReturn('any_field');
+    when(validation1.field).thenReturn('other_field');
     mockValidation1(null);
 
     validation2 = FieldValidationSpy();
@@ -52,7 +53,7 @@ void main() {
     mockValidation2(null);
 
     validation3 = FieldValidationSpy();
-    when(validation3.field).thenReturn('other_field');
+    when(validation3.field).thenReturn('any_field');
     mockValidation3(null);
     sut = ValidationComposite([validation1, validation2, validation3]);
   });
@@ -71,6 +72,6 @@ void main() {
 
     final error = sut.validate(field: 'any_field', value: 'any_value');
 
-    expect(error, 'error_1');
+    expect(error, 'error_2');
   });
 }
