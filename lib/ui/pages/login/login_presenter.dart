@@ -5,9 +5,9 @@ abstract class LoginPresenter {
 
   Stream<bool> get isFormValidStream;
 
-  Stream<bool> get isLoadingController;
+  Stream<bool> get isLoadingStream;
 
-  Stream<String> get mainErrorController;
+  Stream<String> get mainErrorStream;
 
   void validateEmail(String email);
 

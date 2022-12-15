@@ -34,10 +34,10 @@ void main() {
     when(presenter.isFormValidStream)
         .thenAnswer((_) => isFormValidController.stream);
 
-    when(presenter.isLoadingController)
+    when(presenter.isLoadingStream)
         .thenAnswer((_) => isLoadingController.stream);
 
-    when(presenter.mainErrorController)
+    when(presenter.mainErrorStream)
         .thenAnswer((_) => mainErrorController.stream);
   }
 
