@@ -2,7 +2,7 @@
 
 > ## Caso de sucesso
 
-1. Sistema grava token de acesso do usuário no cache de forma segura
+1. ✅ Sistema grava token de acesso do usuário no cache de forma segura
 
 > ## Exceção - Falha ao gravar no cache
 
