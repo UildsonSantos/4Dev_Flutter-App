@@ -1,4 +1,5 @@
 import 'package:faker/faker.dart';
+import 'package:flutter/widgets.dart';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -204,6 +205,16 @@ void main() {
     sut.validatePassword(password);
 
     expectLater(sut.isLoadingStream, emits(true));
+
+    await sut.auth();
+  });
+
+  test('Should change page on success', () async {
+    sut.validateEmail(email);
+    sut.validatePassword(password);
+
+    sut.navigateToStream
+        .listen(expectAsync1((page) => expect(page, '/surveys')));
 
     await sut.auth();
   });
