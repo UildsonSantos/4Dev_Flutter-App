@@ -9,16 +9,17 @@ import '../protocols/protocols.dart';
 class GetxLoginPresenter extends GetxController implements LoginPresenter {
   final Validation validation;
   final Authentication authentication;
-  SaveCurrentAccount saveCurrentAccount;
+  final SaveCurrentAccount saveCurrentAccount;
+
+  final _emailError = RxString();
+  final _passwordError = RxString();
+  final _isFormValid = false.obs;
+  final _isLoading = false.obs;
+  final _mainError = RxString();
+  final _navigateTo = RxString();
 
   String _email;
   String _password;
-  var _emailError = RxString();
-  var _passwordError = RxString();
-  var _isFormValid = false.obs;
-  var _isLoading = false.obs;
-  var _mainError = RxString();
-  var _navigateTo = RxString();
 
   Stream<String> get emailErrorStream => _emailError.stream;
   Stream<String> get passwordErrorStream => _passwordError.stream;
