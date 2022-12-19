@@ -41,12 +41,27 @@ void main() {
       expect(future, throwsA(TypeMatcher<Exception>()));
     });
   });
-  
+
   group('fetch secure', () {
+    mockFetchSecure() {
+      when(secureStorage.read(key: anyNamed('key')))
+          .thenAnswer((_) async => value);
+    }
+
+    setUp(() {
+      mockFetchSecure();
+    });
+
     test('should call fetch secure with correct values', () async {
       await sut.fetchSecure(key);
 
       verify(secureStorage.read(key: key));
+    });
+
+    test('should return correct value on success', () async {
+      final fetchedvalue = await sut.fetchSecure(key);
+
+      expect(fetchedvalue, value);
     });
   });
 }
