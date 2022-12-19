@@ -18,9 +18,11 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: '4Dev',
       theme: makeAppTheme(),
-      initialRoute: '/login',
+      initialRoute: '/',
       getPages: [
-        GetPage(name: '/login', page: makeLoginPage),
+        GetPage(name: '/', page: makeSplashPage, transition: Transition.fade),
+        GetPage(
+            name: '/login', page: makeLoginPage, transition: Transition.fadeIn),
         GetPage(
           name: '/surveys',
           page: () => Scaffold(
@@ -28,6 +30,7 @@ class App extends StatelessWidget {
               child: Text('Enquetes'),
             ),
           ),
+          transition: Transition.fadeIn,
         ),
       ],
     );
