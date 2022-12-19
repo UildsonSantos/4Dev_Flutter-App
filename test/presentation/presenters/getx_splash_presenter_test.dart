@@ -30,7 +30,7 @@ void main() {
   });
 
   test('should call LoadCurrentAccount', () async {
-    await sut.checkAccount();
+    await sut.checkAccount(durationInSeconds: 0);
 
     verify(loadCurrentAccount.load()).called(1);
   });
@@ -40,7 +40,7 @@ void main() {
       expectAsync1((page) => expect(page, '/surveys')),
     );
 
-    await sut.checkAccount();
+    await sut.checkAccount(durationInSeconds: 0);
   });
 
   test('should go to login page on null result', () async {
@@ -49,7 +49,7 @@ void main() {
       expectAsync1((page) => expect(page, '/login')),
     );
 
-    await sut.checkAccount();
+    await sut.checkAccount(durationInSeconds: 0);
   });
 
   test('should go to login page on null result', () async {
@@ -58,6 +58,6 @@ void main() {
       expectAsync1((page) => expect(page, '/login')),
     );
 
-    await sut.checkAccount();
+    await sut.checkAccount(durationInSeconds: 0);
   });
 }
