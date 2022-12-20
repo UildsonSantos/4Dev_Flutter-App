@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/i18n/i18n.dart';
 import '../../components/components.dart';
 import '../pages.dart';
 import 'components/components.dart';
@@ -49,7 +50,7 @@ class LoginPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 LoginHeader(),
-                Headline1(text: 'Login'),
+                Headline1(text: R.strings.login),
                 Padding(
                   padding: const EdgeInsets.all(32),
                   child: Provider(
@@ -66,7 +67,7 @@ class LoginPage extends StatelessWidget {
                           FlatButton.icon(
                             onPressed: () {},
                             icon: Icon(Icons.person),
-                            label: Text('Criar Conta'),
+                            label: Text(R.strings.addAccount),
                           )
                         ],
                       ),

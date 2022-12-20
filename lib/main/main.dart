@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/route_manager.dart';
 
 import '../ui/components/components.dart';
+import '../utils/i18n/i18n.dart';
 import 'factories/factories.dart';
 
 void main() {
@@ -27,7 +28,7 @@ class App extends StatelessWidget {
           name: '/surveys',
           page: () => Scaffold(
             body: Center(
-              child: Text('Enquetes'),
+              child: Text(R.strings.polls),
             ),
           ),
           transition: Transition.fadeIn,
