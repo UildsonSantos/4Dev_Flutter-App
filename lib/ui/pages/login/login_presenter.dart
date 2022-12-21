@@ -1,13 +1,15 @@
-abstract class LoginPresenter {
-  Stream<String> get emailErrorStream;
+import '../../helpers/errors/errors.dart';
 
-  Stream<String> get passwordErrorStream;
+abstract class LoginPresenter {
+  Stream<UIError> get emailErrorStream;
+
+  Stream<UIError> get passwordErrorStream;
 
   Stream<bool> get isFormValidStream;
 
   Stream<bool> get isLoadingStream;
 
-  Stream<String> get mainErrorStream;
+  Stream<UIError> get mainErrorStream;
 
   Stream<String> get navigateToStream;
 
@@ -16,6 +18,4 @@ abstract class LoginPresenter {
   void validatePassword(String password);
 
   Future<void> auth();
-
-  void dispose();
 }

@@ -1,5 +1,6 @@
 import 'package:test/test.dart';
 
+import 'package:fordev/presentation/protocols/validation.dart';
 import 'package:fordev/validation/validators/validators.dart';
 
 void main() {
@@ -30,6 +31,6 @@ void main() {
   test('should return error if email is invalid', () {
     final error = sut.validate('occursum.o');
 
-    expect(error, 'Campo inválido');
+    expect(error, ValidationError.invalidField);
   });
 }
