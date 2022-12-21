@@ -1,10 +1,11 @@
 import 'package:faker/faker.dart';
+import 'package:mockito/mockito.dart';
+import 'package:test/test.dart';
+
 import 'package:fordev/data/http/http.dart';
 import 'package:fordev/data/usecases/usecases.dart';
 import 'package:fordev/domain/helpers/helpers.dart';
 import 'package:fordev/domain/usecases/usecases.dart';
-import 'package:mockito/mockito.dart';
-import 'package:test/test.dart';
 
 class HttpClientSpy extends Mock implements HttpClient {}
 
@@ -54,6 +55,14 @@ void main() {
 
   test('should throw UnexpectedError if HttpClient returns 400', () async {
     mockHttpError(HttpError.badRequest);
+
+    final future = sut.add(params);
+
+    expect(future, throwsA(DomainError.unexpected));
+  });
+
+  test('should throw UnexpectedError if HttpClient returns 404', () async {
+    mockHttpError(HttpError.notFound);
 
     final future = sut.add(params);
 
