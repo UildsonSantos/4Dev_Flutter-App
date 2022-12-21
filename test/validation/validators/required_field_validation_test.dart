@@ -7,7 +7,7 @@ void main() {
   RequiredFieldValidation sut;
 
   setUp(() {
-    sut = RequiredFieldValidation('any_field');
+    sut = RequiredFieldValidation(field: 'any_field');
   });
 
   test('should return null if value is not empty', () async {

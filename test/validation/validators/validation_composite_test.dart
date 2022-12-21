@@ -1,7 +1,7 @@
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import 'package:fordev/presentation/protocols/validation.dart';
+import 'package:fordev/presentation/protocols/protocols.dart';
 
 import 'package:fordev/validation/protocols/protocols.dart';
 import 'package:fordev/validation/validators/validators.dart';
@@ -38,7 +38,11 @@ void main() {
     validation3 = FieldValidationSpy();
     when(validation3.field).thenReturn('any_field');
     mockValidation3(null);
-    sut = ValidationComposite([validation1, validation2, validation3]);
+    sut = ValidationComposite(validations: [
+      validation1,
+      validation2,
+      validation3,
+    ]);
   });
 
   test('should return null if all validations returns null or empty', () {

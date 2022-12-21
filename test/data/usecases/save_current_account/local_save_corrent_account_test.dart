@@ -21,7 +21,7 @@ void main() {
       saveSecureCacheStorage: saveSecureCacheStorage,
     );
 
-    account = AccountEntity(faker.guid.guid());
+    account = AccountEntity(token: faker.guid.guid());
   });
 
   void mockError() {

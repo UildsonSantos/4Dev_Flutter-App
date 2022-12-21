@@ -1,9 +1,10 @@
 import 'package:faker/faker.dart';
-import 'package:fordev/data/http/http.dart';
-import 'package:fordev/infra/http/http.dart';
 import 'package:http/http.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
+
+import 'package:fordev/data/http/http.dart';
+import 'package:fordev/infra/http/http.dart';
 
 class ClientSpy extends Mock implements Client {}
 
@@ -14,13 +15,12 @@ void main() {
 
   setUp(() {
     client = ClientSpy();
-    sut = HttpAdapter(client);
+    sut = HttpAdapter(client: client);
     url = faker.internet.httpUrl();
   });
 
   group('shared', () {
     test('should throw SeverError if invalid method is provided ', () async {
-
       final future = sut.request(url: url, method: 'invalid_method');
 
       expect(future, throwsA(HttpError.serverError));
@@ -35,6 +35,7 @@ void main() {
         {String body = '{"any_key":"any_value"}'}) {
       mockRequest().thenAnswer((_) async => Response(body, statusCode));
     }
+
     void mockError() {
       mockRequest().thenThrow(Exception());
     }

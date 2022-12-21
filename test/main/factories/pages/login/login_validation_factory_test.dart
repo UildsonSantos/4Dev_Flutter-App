@@ -1,4 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
+
 import 'package:fordev/main/factories/pages/login/login.dart';
 import 'package:fordev/validation/validators/validators.dart';
 
@@ -7,9 +8,9 @@ void main() {
     final validations = makeLoginValidations();
 
     expect(validations, [
-      RequiredFieldValidation('email'),
+      RequiredFieldValidation(field: 'email'),
       EmailValidation('email'),
-      RequiredFieldValidation('password')
+      RequiredFieldValidation(field: 'password')
     ]);
   });
 }

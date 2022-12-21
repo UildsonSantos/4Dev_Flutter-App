@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:mockito/mockito.dart';
 
-import 'package:fordev/ui/helpers/errors/errors.dart';
+import 'package:fordev/ui/helpers/helpers.dart';
 import 'package:fordev/ui/pages/pages.dart';
 
 class LoginPresenterSpy extends Mock implements LoginPresenter {}
@@ -67,7 +67,7 @@ void main() {
     final loginPage = GetMaterialApp(
       initialRoute: '/login',
       getPages: [
-        GetPage(name: '/login', page: () => LoginPage(presenter)),
+        GetPage(name: '/login', page: () => LoginPage(presenter: presenter)),
         GetPage(
             name: '/any_route', page: () => Scaffold(body: Text('fake page'))),
       ],

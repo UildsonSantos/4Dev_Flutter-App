@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 import '../../../domain/entities/entities.dart';
@@ -15,7 +14,7 @@ class LocalLoadCurrentAccount implements LoadCurrentAccount {
   Future<AccountEntity> load() async {
     try {
       final token = await fetchSecureCacheStorage.fetchSecure('token');
-      return AccountEntity(token);
+      return AccountEntity(token: token);
     } catch (error) {
       throw DomainError.unexpected;
     }

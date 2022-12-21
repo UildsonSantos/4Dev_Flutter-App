@@ -7,7 +7,7 @@ class ValidationBuilder {
   List<FieldValidation> validations = [];
 
   ValidationBuilder._();
-  
+
   static ValidationBuilder field(String fieldName) {
     _instance = ValidationBuilder._();
     _instance.fieldName = fieldName;
@@ -15,7 +15,7 @@ class ValidationBuilder {
   }
 
   ValidationBuilder required() {
-    validations.add(RequiredFieldValidation(fieldName));
+    validations.add(RequiredFieldValidation(field: fieldName));
     return this;
   }
 
