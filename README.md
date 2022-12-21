@@ -8,64 +8,76 @@
 ---
 
 ## [**Link para o curso completo**](https://www.udemy.com/course/flutter-com-mango/)
+
 Essa aplicativo faz parte do treinamento do professor Rodrigo Manguinho (Mango) na Udemy.
 O objetivo do treinamento é mostrar como criar um aplicativo com Flutter usando uma arquitetura bem definida e desacoplada, seguindo TDD (programação orientada a testes) como metodologia de trabalho, Clean Architecture para fazer a distribuição de responsabilidades em camadas, sempre seguindo os princípios do SOLID e aplicando Design Patterns para resolver alguns problemas comuns.https://www.udemy.com/course/flutter-com-mango/
+
 ## [**Link para a documentação da API**](http://fordevs.herokuapp.com/api-docs)
 
 > ## Casos de Uso
+
 1. [Login](./requirements/use_cases/remote_authentication.md)
 
 > ## Princípios
-* Single Responsibility Principle (SRP)
-* Open Closed Principle (OCP)
-* Liskov Substitution Principle (LSP)
-* Interface Segregation Principle (ISP)
-* Dependency Inversion Principle (DIP)
-* Separation of Concerns (SOC)
-* Don't Repeat Yourself (DRY)
-* You Aren't Gonna Need It (YAGNI)
-* Keep It Simple, Silly (KISS)
-* Command Query Separation (CQS)
-* Composition Over Inheritance
-* Small Commits
-> ## Design Patterns
-* Factory
-* Adapter
-* Composite
-* Decorator
-* Dependency Injection
-* Abstract Server
-* Composition Root
-* Builder
-* Singleton
-* Observer
+
+- Single Responsibility Principle (SRP)
+- Open Closed Principle (OCP)
+- Liskov Substitution Principle (LSP)
+- Interface Segregation Principle (ISP)
+- Dependency Inversion Principle (DIP)
+- Separation of Concerns (SOC)
+- Don't Repeat Yourself (DRY)
+- You Aren't Gonna Need It (YAGNI)
+- Keep It Simple, Silly (KISS)
+- Command Query Separation (CQS)
+- Composition Over Inheritance
+- Small Commits
+
+  > ## Design Patterns
+
+- Factory
+- Adapter
+- Composite
+- Decorator
+- Dependency Injection
+- Abstract Server
+- Composition Root
+- Builder
+- Singleton
+- Observer
 
 > ## Metodologias e Designs
-* TDD
-* BDD
-* Clean Architecture
-* Reactive Programming
-* GitFlow
-* Modular Design
-* Dependency Diagrams
-* Use Cases
-> ## Bibliotecas e Ferramentas
-* Flutter
-* Http
-* Provider
-* GetX
-* Equatable
-* Mockito
-* Faker
-* Git
+
+- TDD
+- BDD
+- Clean Architecture
+- Reactive Programming
+- GitFlow
+- Modular Design
+- Dependency Diagrams
+- Use Cases
+
+  > ## Bibliotecas e Ferramentas
+
+- Flutter
+- Http
+- Provider
+- GetX
+- Equatable
+- Mockito
+- Faker
+- Git
+- Flutter Secure Storage
+- i18n
 
 > ## Features de Testes
-* Testes Unitários
-* Testes de Widgets
-* Testes de Streams
-* Testes de Integração
-* Cobertura de Testes
-* Test Doubles
-* Mocks
-* Stubs
-* Spies
+
+- Testes Unitários
+- Testes de Widgets
+- Testes de Streams
+- Testes de Integração
+- Cobertura de Testes
+- Test Doubles
+- Mocks
+- Stubs
+- Spies

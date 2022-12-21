@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:fordev/utils/i18n/strings/pt_br.dart';
 
 import 'strings/strings.dart';
 
