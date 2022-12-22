@@ -196,4 +196,25 @@ void main() {
     );
     expect(passwordErrorChildren, findsOneWidget);
   });
+
+  testWidgets('should present paasswordConfirmation error',
+      (WidgetTester tester) async {
+    await loadPage(tester);
+
+    passwordConfirmationErrorController.add(UIError.invalidField);
+    await tester.pump();
+    expect(find.text('Campo inválido'), findsOneWidget);
+
+    passwordConfirmationErrorController.add(UIError.requiredField);
+    await tester.pump();
+    expect(find.text('Campo obrigatório'), findsOneWidget);
+
+    passwordConfirmationErrorController.add(null);
+    await tester.pump();
+    final passwordConfirmationErrorChildren = find.descendant(
+      of: find.bySemanticsLabel('Confirme sua senha'),
+      matching: find.byType(Text),
+    );
+    expect(passwordConfirmationErrorChildren, findsOneWidget);
+  });
 }
