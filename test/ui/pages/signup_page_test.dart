@@ -176,4 +176,24 @@ void main() {
     );
     expect(nameErrorChildren, findsOneWidget);
   });
+
+  testWidgets('should present paassword error', (WidgetTester tester) async {
+    await loadPage(tester);
+
+    passwordErrorController.add(UIError.invalidField);
+    await tester.pump();
+    expect(find.text('Campo inválido'), findsOneWidget);
+
+    passwordErrorController.add(UIError.requiredField);
+    await tester.pump();
+    expect(find.text('Campo obrigatório'), findsOneWidget);
+
+    passwordErrorController.add(null);
+    await tester.pump();
+    final passwordErrorChildren = find.descendant(
+      of: find.bySemanticsLabel('Senha'),
+      matching: find.byType(Text),
+    );
+    expect(passwordErrorChildren, findsOneWidget);
+  });
 }
