@@ -4,8 +4,8 @@
 
 1. ✅ Sistema valida os dados
 2. ✅ Sistema faz uma requisição para a URL da API de signup
-3. Sistema valida os dados recebidos da API
-4. Sistema entrega os dados da conta do usuário
+3. ✅ Sistema valida os dados recebidos da API
+4. ✅ Sistema entrega os dados da conta do usuário
 
 > ## Exceção - URL inválida
 
@@ -25,4 +25,4 @@
 
 > ## Exceção - Email em uso
 
-1. Sistema retorna uma mensagem de erro informando que o email já está em uso
+1. ✅ Sistema retorna uma mensagem de erro informando que o email já está em uso

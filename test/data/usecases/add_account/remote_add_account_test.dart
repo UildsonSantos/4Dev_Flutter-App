@@ -4,6 +4,7 @@ import 'package:test/test.dart';
 
 import 'package:fordev/data/http/http.dart';
 import 'package:fordev/data/usecases/usecases.dart';
+
 import 'package:fordev/domain/helpers/helpers.dart';
 import 'package:fordev/domain/usecases/usecases.dart';
 
@@ -15,12 +16,19 @@ void main() {
   String url;
   AddAccountParams params;
 
+  Map mockValidData() =>
+      {'accessToken': faker.guid.guid(), 'name': faker.person.name()};
+
   PostExpectation mockRequest() => when(
         httpClient.request(
             url: anyNamed('url'),
             method: anyNamed('method'),
             body: anyNamed('body')),
       );
+
+  void mockHttpData(Map data) {
+    mockRequest().thenAnswer((_) async => data);
+  }
 
   void mockHttpError(HttpError error) {
     mockRequest().thenThrow(error);
@@ -36,6 +44,7 @@ void main() {
       password: faker.internet.password(),
       passwordConfirmation: faker.internet.password(),
     );
+    mockHttpData(mockValidData());
   });
 
   test('should call HttpClient with correct method', () async {
@@ -77,12 +86,21 @@ void main() {
     expect(future, throwsA(DomainError.unexpected));
   });
 
-  test('''should throw invalidCredentialError if HttpClient returs 403''', () async {
-      mockHttpError(HttpError.forbidden);
+  test('should throw invalidCredentialError if HttpClient returns 403',
+      () async {
+    mockHttpError(HttpError.forbidden);
 
-      final future = sut.add(params);
+    final future = sut.add(params);
 
-      expect(future, throwsA(DomainError.emailInUse));
-    },
-  );
+    expect(future, throwsA(DomainError.emailInUse));
+  });
+
+  test('should return an Account if HttpClient returns 200', () async {
+    final validData = mockValidData();
+    mockHttpData(validData);
+
+    final account = await sut.add(params);
+
+    expect(account.token, validData['accessToken']);
+  });
 }
