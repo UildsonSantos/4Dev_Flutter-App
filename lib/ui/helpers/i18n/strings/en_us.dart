@@ -18,6 +18,9 @@ class EnUs implements Translations {
   String get addAccount => 'Add account';
 
   @override
+  String get confirmPassword => 'Confirm password';
+
+  @override
   String get email => 'Email';
 
   @override
@@ -25,6 +28,9 @@ class EnUs implements Translations {
 
   @override
   String get login => 'Login';
+
+  @override
+  String get name => 'Name';
 
   @override
   String get password => 'Password';
