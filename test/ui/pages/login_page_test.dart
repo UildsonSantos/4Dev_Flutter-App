@@ -205,15 +205,15 @@ void main() {
 
     isFormValidController.add(true);
     await tester.pump();
-
-    await tester.tap(find.byType(RaisedButton));
+    final button = find.byType(RaisedButton);
+    await tester.ensureVisible(button);
+    await tester.tap(button);
     await tester.pump();
 
     verify(presenter.auth()).called(1);
   });
 
-  testWidgets('should call authentication on form submit',
-      (WidgetTester tester) async {
+  testWidgets('should present loading', (WidgetTester tester) async {
     await loadPage(tester);
 
     isLoadingController.add(true);
