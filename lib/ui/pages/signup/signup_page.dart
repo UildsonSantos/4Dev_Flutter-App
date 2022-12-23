@@ -22,6 +22,14 @@ class SignUpPage extends StatelessWidget {
 
     return Scaffold(
       body: Builder(builder: (context) {
+        presenter.isLoadingStream.listen((isLoading) {
+          if (isLoading) {
+            showLoading(context);
+          } else {
+            hideLoading(context);
+          }
+        });
+
         return GestureDetector(
           onTap: _hideKeyboard,
           child: SingleChildScrollView(
@@ -32,7 +40,7 @@ class SignUpPage extends StatelessWidget {
                 Headline1(text: R.strings.login),
                 Padding(
                   padding: const EdgeInsets.all(32),
-                  child: Provider<SignUpPresenter>(
+                  child: Provider(
                     create: (_) => presenter,
                     child: Form(
                       child: Column(
