@@ -2,6 +2,9 @@ import 'translations.dart';
 
 class EnUs implements Translations {
   @override
+  String get msgEmailInUse => 'Email is already in use';
+
+  @override
   String get msgInvalidCredentials => 'Invalid credentials';
 
   @override

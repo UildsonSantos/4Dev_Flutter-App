@@ -2,6 +2,9 @@ import 'translations.dart';
 
 class PtBr implements Translations {
   @override
+  String get msgEmailInUse => 'O email já está em uso.';
+
+  @override
   String get msgInvalidCredentials => 'Credenciais inválidas';
 
   @override
