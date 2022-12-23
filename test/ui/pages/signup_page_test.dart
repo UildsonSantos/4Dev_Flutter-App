@@ -18,12 +18,14 @@ void main() {
   StreamController<UIError> emailErrorController;
   StreamController<UIError> passwordErrorController;
   StreamController<UIError> passwordConfirmationErrorController;
+  StreamController<bool> isFormValidController;
 
   void initStream() {
     nameErrorController = StreamController<UIError>();
     emailErrorController = StreamController<UIError>();
     passwordErrorController = StreamController<UIError>();
     passwordConfirmationErrorController = StreamController<UIError>();
+    isFormValidController = StreamController<bool>();
   }
 
   void mockStream() {
@@ -35,6 +37,8 @@ void main() {
         .thenAnswer((_) => passwordErrorController.stream);
     when(presenter.passwordConfirmationErrorStream)
         .thenAnswer((_) => passwordConfirmationErrorController.stream);
+    when(presenter.isFormValidStream)
+        .thenAnswer((_) => isFormValidController.stream);
   }
 
   void closeStream() {
@@ -42,6 +46,7 @@ void main() {
     emailErrorController.close();
     passwordErrorController.close();
     passwordConfirmationErrorController.close();
+    isFormValidController.close();
   }
 
   Future<void> loadPage(WidgetTester tester) async {
@@ -177,7 +182,7 @@ void main() {
     expect(nameErrorChildren, findsOneWidget);
   });
 
-  testWidgets('should present paassword error', (WidgetTester tester) async {
+  testWidgets('should present password error', (WidgetTester tester) async {
     await loadPage(tester);
 
     passwordErrorController.add(UIError.invalidField);
@@ -197,7 +202,7 @@ void main() {
     expect(passwordErrorChildren, findsOneWidget);
   });
 
-  testWidgets('should present paasswordConfirmation error',
+  testWidgets('should present passwordConfirmation error',
       (WidgetTester tester) async {
     await loadPage(tester);
 
