@@ -3,8 +3,10 @@ import 'package:meta/meta.dart';
 
 import '../../domain/helpers/helpers.dart';
 import '../../domain/usecases/usecases.dart';
+
 import '../../ui/helpers/helpers.dart';
 import '../../ui/pages/pages.dart';
+
 import '../protocols/protocols.dart';
 
 class GetxLoginPresenter extends GetxController implements LoginPresenter {
@@ -92,5 +94,9 @@ class GetxLoginPresenter extends GetxController implements LoginPresenter {
       }
       _isLoading.value = false;
     }
+  }
+
+  void goToSignUp() {
+    _navigateTo.value = '/signup';
   }
 }
