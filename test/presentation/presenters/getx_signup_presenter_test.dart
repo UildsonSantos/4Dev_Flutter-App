@@ -12,11 +12,14 @@ import 'package:fordev/presentation/presenters/presenters.dart';
 
 class ValidationSpy extends Mock implements Validation {}
 
+class SaveCurrentAccountSpy extends Mock implements SaveCurrentAccount {}
+
 class AddAccountSpy extends Mock implements AddAccount {}
 
 void main() {
   AddAccountSpy addAccount;
   GetxSignUpPresenter sut;
+  SaveCurrentAccountSpy saveCurrentAccount;
   ValidationSpy validation;
   String email;
   String name;
@@ -41,10 +44,12 @@ void main() {
 
   setUp(() {
     addAccount = AddAccountSpy();
+    saveCurrentAccount = SaveCurrentAccountSpy();
     validation = ValidationSpy();
 
     sut = GetxSignUpPresenter(
       addAccount: addAccount,
+      saveCurrentAccount: saveCurrentAccount,
       validation: validation,
     );
 
@@ -285,5 +290,16 @@ void main() {
     );
 
     verify(addAccount.add(accountParams)).called(1);
+  });
+
+  test('Should call SaveCurrentAccount with correct value', () async {
+    sut.validateName(name);
+    sut.validateEmail(email);
+    sut.validatePassword(password);
+    sut.validatePasswordConfirmation(passwordConfirmation);
+
+    await sut.signUp();
+
+    verify(saveCurrentAccount.save(AccountEntity(token: token))).called(1);
   });
 }
