@@ -1,12 +1,14 @@
-import 'dart:math';
-
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 
+import '../../domain/usecases/usecases.dart';
+
 import '../../ui/helpers/helpers.dart';
+
 import '../protocols/protocols.dart';
 
 class GetxSignUpPresenter extends GetxController {
+  final AddAccount addAccount;
   final Validation validation;
 
   final _emailError = Rx<UIError>();
@@ -28,6 +30,7 @@ class GetxSignUpPresenter extends GetxController {
   Stream<bool> get isFormValidStream => _isFormValid.stream;
 
   GetxSignUpPresenter({
+    @required this.addAccount,
     @required this.validation,
   });
 
@@ -69,13 +72,24 @@ class GetxSignUpPresenter extends GetxController {
   }
 
   void _validateForm() {
-    _isFormValid.value = _nameError.value == null &&
-        _emailError.value == null &&
+    _isFormValid.value = _emailError.value == null &&
+        _nameError.value == null &&
         _passwordError.value == null &&
         _passwordConfirmationError.value == null &&
-        _name != null &&
         _email != null &&
+        _name != null &&
         _password != null &&
         _passwordConfirmation != null;
+  }
+
+  Future<void> signUp() async {
+    await addAccount.add(
+      AddAccountParams(
+        email: _email,
+        name: _name,
+        password: _password,
+        passwordConfirmation: _passwordConfirmation,
+      ),
+    );
   }
 }
