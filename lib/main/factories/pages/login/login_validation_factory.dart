@@ -8,5 +8,5 @@ Validation makeLoginValidation() =>
 
 List<FieldValidation> makeLoginValidations() => [
       ...ValidationBuilder.field('email').required().email().build(),
-      ...ValidationBuilder.field('password').required().build()
+      ...ValidationBuilder.field('password').required().minLengthSize(3).build()
     ];
