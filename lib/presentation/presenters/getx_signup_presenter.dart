@@ -101,8 +101,15 @@ class GetxSignUpPresenter extends GetxController {
         ),
       );
       await saveCurrentAccount.save(account);
-    } catch (DomainError) {
-      _mainError.value = UIError.unexpected;
+    } on DomainError catch (error) {
+      switch (error) {
+        case DomainError.emailInUse:
+          _mainError.value = UIError.emailInUse;
+          break;
+        default:
+          _mainError.value = UIError.unexpected;
+          break;
+      }
       _isLoading.value = false;
     }
   }
