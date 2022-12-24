@@ -1,3 +1,4 @@
+import 'package:faker/faker.dart';
 import 'package:meta/meta.dart';
 import 'package:test/test.dart';
 
@@ -36,5 +37,13 @@ void main() {
     final error = sut.validate(null);
 
     expect(error, ValidationError.invalidField);
+  });
+
+  test('should return error if value is less than min size', () async {
+    final smallerSizeTypeError = sut.validate(
+      faker.randomGenerator.string(4, min: 1),
+    );
+
+    expect(smallerSizeTypeError, ValidationError.invalidField);
   });
 }
