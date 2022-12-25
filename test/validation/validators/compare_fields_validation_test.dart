@@ -10,18 +10,28 @@ void main() {
   setUp(() {
     sut = CompareFieldsValidation(
       field: 'any_field',
-      valueToCompare: 'any_value',
+      fieldToCompare: 'other_field',
     );
   });
 
   test('should return error if values are not equal', () async {
-    final differentValuesError = sut.validate('wrong_value');
+    final formData = {
+      'any_field': 'any_value',
+      'other_field': 'other_value',
+    };
+
+    final differentValuesError = sut.validate(formData);
 
     expect(differentValuesError, ValidationError.invalidField);
   });
 
   test('should return null if values are equal', () async {
-    final equalValues = sut.validate('any_value');
+    final formData = {
+      'any_field': 'any_value',
+      'other_field': 'any_value',
+    };
+
+    final equalValues = sut.validate(formData);
 
     expect(equalValues, null);
   });

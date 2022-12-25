@@ -11,19 +11,19 @@ void main() {
   });
 
   test('should return null if value is not empty', () async {
-    final error = sut.validate('any_value');
+    final value = sut.validate({'any_field': 'any_value'});
 
-    expect(error, null);
+    expect(value, null);
   });
 
   test('should return error if value is empty', () async {
-    final error = sut.validate('');
+    final error = sut.validate({'any_field': ''});
 
     expect(error, ValidationError.requiredField);
   });
 
   test('should return error if value is null', () async {
-    final error = sut.validate(null);
+    final error = sut.validate({'any_field': null});
 
     expect(error, ValidationError.requiredField);
   });

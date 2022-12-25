@@ -12,6 +12,6 @@ class RequiredFieldValidation extends Equatable implements FieldValidation {
   @override
   List<Object> get props => [field];
 
-  ValidationError validate(String value) =>
-      value?.isNotEmpty == true ? null : ValidationError.requiredField;
+  ValidationError validate(Map input) =>
+      input[field]?.isNotEmpty == true ? null : ValidationError.requiredField;
 }

@@ -11,25 +11,25 @@ void main() {
   });
 
   test('should return null if email is empty', () {
-    final error = sut.validate('');
+    final error = sut.validate({'any_field': ''});
 
     expect(error, null);
   });
 
   test('should return null if email is null', () {
-    final error = sut.validate(null);
+    final error = sut.validate({'any_field': null});
 
     expect(error, null);
   });
 
   test('should return null if email is valid', () {
-    final error = sut.validate('occursum.o@gmail.com');
+    final error = sut.validate({'any_field': 'occursum.o@gmail.com'});
 
     expect(error, null);
   });
 
   test('should return error if email is invalid', () {
-    final error = sut.validate('occursum.o');
+    final error = sut.validate({'any_field': 'occursum'});
 
     expect(error, ValidationError.invalidField);
   });

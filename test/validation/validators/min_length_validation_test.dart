@@ -12,37 +12,37 @@ void main() {
   });
 
   test('should return error if value is empty', () async {
-    final error = sut.validate('');
+    final valueEmptyError = sut.validate({'any_field': ''});
 
-    expect(error, ValidationError.invalidField);
+    expect(valueEmptyError, ValidationError.invalidField);
   });
 
   test('should return error if value is null', () async {
-    final error = sut.validate(null);
+    final valueNullError = sut.validate({'any_field': null});
 
-    expect(error, ValidationError.invalidField);
+    expect(valueNullError, ValidationError.invalidField);
   });
 
   test('should return error if value is less than min size', () async {
-    final smallerSizeTypeError = sut.validate(
-      faker.randomGenerator.string(4, min: 1),
-    );
+    final smallerSizeLengthError = sut.validate({
+      'any_field': faker.randomGenerator.string(4, min: 1),
+    });
 
-    expect(smallerSizeTypeError, ValidationError.invalidField);
+    expect(smallerSizeLengthError, ValidationError.invalidField);
   });
 
   test('should return null if value is equal than min size', () async {
-    final equalMinSizeValue = sut.validate(
-      faker.randomGenerator.string(5, min: 5),
-    );
+    final equalMinSizeValue = sut.validate({
+      'any_field': faker.randomGenerator.string(5, min: 5),
+    });
 
     expect(equalMinSizeValue, null);
   });
 
   test('should return null if value is bigger than min size', () async {
-    final biggerThanMinSizeValue = sut.validate(
-      faker.randomGenerator.string(13, min: 6),
-    );
+    final biggerThanMinSizeValue = sut.validate({
+      'any_field': faker.randomGenerator.string(13, min: 6),
+    });
 
     expect(biggerThanMinSizeValue, null);
   });
