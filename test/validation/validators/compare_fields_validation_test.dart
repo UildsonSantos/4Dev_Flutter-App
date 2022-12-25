@@ -14,6 +14,18 @@ void main() {
     );
   });
 
+  test('should return null on invalid cases', () async {
+    final formDataWithOnlyAnyField = sut.validate({'any_field': 'any_value'});
+    expect(formDataWithOnlyAnyField, null);
+
+    final formDataWithOnlyOtherField =
+        sut.validate({'other_field': 'other_value'});
+    expect(formDataWithOnlyOtherField, null);
+
+    final formDataEmpty = sut.validate({});
+    expect(formDataEmpty, null);
+  });
+
   test('should return error if values are not equal', () async {
     final formData = {
       'any_field': 'any_value',
