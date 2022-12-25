@@ -10,6 +10,17 @@ void main() {
     sut = EmailValidation('any_field');
   });
 
+  test('should return null on invalid case', () {
+    final invalidCase = sut.validate({});
+
+    expect(
+      invalidCase,
+      null,
+      reason: '''while not receiving the other 
+        field that I want to compare, it should return without errors''',
+    );
+  });
+
   test('should return null if email is empty', () {
     final error = sut.validate({'any_field': ''});
 
