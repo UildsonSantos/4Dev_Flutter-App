@@ -7,7 +7,7 @@ import 'package:fordev/data/http/http.dart';
 import 'package:fordev/data/models/remote_survey_model.dart';
 
 import 'package:fordev/domain/entities/entities.dart';
-
+import 'package:fordev/domain/helpers/helpers.dart';
 
 class RemoteLoadSurveys {
   final String url;
@@ -19,8 +19,14 @@ class RemoteLoadSurveys {
   });
 
   Future<List<SurveyEntity>> load() async {
-    final httpResponse = await httpClient.request(url: url, method: 'get');
-    return httpResponse.map((json) => RemoteSurveyModel.fromJson(json).toEntity()).toList();
+    try {
+      final httpResponse = await httpClient.request(url: url, method: 'get');
+      return httpResponse
+          .map((json) => RemoteSurveyModel.fromJson(json).toEntity())
+          .toList();
+    } on HttpError {
+      throw DomainError.unexpected;
+    }
   }
 }
 
@@ -64,7 +70,7 @@ void main() {
     listToTest = data;
     mockRequest().thenAnswer((_) async => data);
   }
-
+  
   setUp(() {
     httpClient = HttpClientSpy();
     url = faker.internet.httpUrl();
@@ -103,5 +109,17 @@ void main() {
       )
     ];
     expect(surveys, responseSurveys);
+  });
+
+  test(
+      'should throw UnexpectedError if HttpClient returns 200 with invalid data',
+      () async {
+    mockHttpData([
+      {'invalid_key': 'invalid_value'}
+    ]);
+
+    final future = sut.load();
+
+    expect(future, throwsA(DomainError.unexpected));
   });
 }
