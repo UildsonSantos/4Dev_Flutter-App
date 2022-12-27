@@ -210,7 +210,8 @@ void main() {
       expect(response, null);
     });
 
-    test('should return BadRequestError if get returns 400 with body empty', () async {
+    test('should return BadRequestError if get returns 400 with body empty',
+        () async {
       mockResponse(400, body: '');
 
       final future = sut.request(url: url, method: 'get');
@@ -224,6 +225,14 @@ void main() {
       final future = sut.request(url: url, method: 'get');
 
       expect(future, throwsA(HttpError.badRequest));
+    });
+
+    test('should return UnauthorizedError if get returns 401', () async {
+      mockResponse(401);
+
+      final future = sut.request(url: url, method: 'get');
+
+      expect(future, throwsA(HttpError.unauthorized));
     });
   });
 }
