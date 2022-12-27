@@ -153,6 +153,7 @@ void main() {
       expect(future, throwsA(HttpError.serverError));
     });
   });
+
   group('get', () {
     PostExpectation mockRequest() =>
         when(client.get(any, headers: anyNamed('headers')));
@@ -160,6 +161,10 @@ void main() {
     void mockResponse(int statusCode,
         {String body = '{"any_key":"any_value"}'}) {
       mockRequest().thenAnswer((_) async => Response(body, statusCode));
+    }
+
+    void mockError() {
+      mockRequest().thenThrow(Exception());
     }
 
     setUp(() {
@@ -253,6 +258,14 @@ void main() {
 
     test('should return ServerError if get returns 500', () async {
       mockResponse(500);
+
+      final future = sut.request(url: url, method: 'get');
+
+      expect(future, throwsA(HttpError.serverError));
+    });
+
+    test('should return ServerError if get throws', () async {
+      mockError();
 
       final future = sut.request(url: url, method: 'get');
 
