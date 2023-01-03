@@ -39,7 +39,7 @@ class EnUs implements Translations {
   String get password => 'Password';
 
   @override
-  String get polls => 'Polls';
+  String get surveys => 'Surveys';
 
   @override
   String get wait => 'Wait...';
