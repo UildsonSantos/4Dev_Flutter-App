@@ -1,9 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:fordev/ui/components/components.dart';
-import 'package:fordev/ui/pages/pages.dart';
 
+import '../../components/components.dart';
 import '../../helpers/helpers.dart';
+import '../pages.dart';
 import 'components/components.dart';
 
 class SurveysPage extends StatelessWidget {
@@ -19,25 +19,40 @@ class SurveysPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(R.strings.surveys),
       ),
-      body: Builder(
-        builder: (context) {
-          presenter.isLoadingStream.listen((isLoading) {
-            isLoading == true ? showLoading(context) : hideLoading(context);
-          });
+      body: Builder(builder: (context) {
+        presenter.isLoadingStream.listen((isLoading) {
+          isLoading == true ? showLoading(context) : hideLoading(context);
+        });
 
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            child: CarouselSlider(
-              options: CarouselOptions(enlargeCenterPage: true, aspectRatio: 1),
-              items: [
-                SurveyItem(),
-                SurveyItem(),
-                SurveyItem(),
-              ],
-            ),
-          );
-        },
-      ),
+        return StreamBuilder<List<SurveyViewModel>>(
+          stream: presenter.loadSurveysStream,
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Column(
+                children: [
+                  Text(snapshot.error),
+                  RaisedButton(
+                    onPressed: null,
+                    child: Text(R.strings.reload),
+                  )
+                ],
+              );
+            }
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: CarouselSlider(
+                options:
+                    CarouselOptions(enlargeCenterPage: true, aspectRatio: 1),
+                items: [
+                  SurveyItem(),
+                  SurveyItem(),
+                  SurveyItem(),
+                ],
+              ),
+            );
+          },
+        );
+      }),
     );
   }
 }
