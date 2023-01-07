@@ -51,12 +51,27 @@ void main() {
         method: 'post',
         body: {'any_key': 'any_value'},
       );
-
       verify(
         client.post(url,
             headers: {
               'content-type': 'application/json',
               'accept': 'application/json'
+            },
+            body: '{"any_key":"any_value"}'),
+      );
+
+      await sut.request(
+        url: url,
+        method: 'post',
+        body: {'any_key': 'any_value'},
+        headers: {'any_header': 'any_value'},
+      );
+      verify(
+        client.post(url,
+            headers: {
+              'content-type': 'application/json',
+              'accept': 'application/json',
+              'any_header': 'any_value',
             },
             body: '{"any_key":"any_value"}'),
       );
@@ -177,13 +192,23 @@ void main() {
         url: url,
         method: 'get',
       );
-
-      final headers = {
+      final headersTypeOne = {
         'content-type': 'application/json',
         'accept': 'application/json',
       };
+      verify(client.get(url, headers: headersTypeOne));
 
-      verify(client.get(url, headers: headers));
+      await sut.request(
+        url: url,
+        method: 'get',
+        headers: {'any_header': 'any_value'},
+      );
+      final headersTypeTwo = {
+        'content-type': 'application/json',
+        'accept': 'application/json',
+        'any_header': 'any_value',
+      };
+      verify(client.get(url, headers: headersTypeTwo));
     });
 
     test('should return data if get returns 200', () async {
