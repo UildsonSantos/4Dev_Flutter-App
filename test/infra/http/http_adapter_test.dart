@@ -4,6 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import 'package:fordev/data/http/http.dart';
+
 import 'package:fordev/infra/http/http.dart';
 
 class ClientSpy extends Mock implements Client {}
