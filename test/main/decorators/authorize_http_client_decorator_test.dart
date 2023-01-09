@@ -21,11 +21,16 @@ class FetchSecureCacheStorageSpy extends Mock
     implements FetchSecureCacheStorage {}
 
 void main() {
-  test('should call FetchSecureCacheStorage with correct key', () async {
-    final fetchSecureCacheStorage = FetchSecureCacheStorageSpy();
-    final sut = AuthorizedHttpClientDecorator(
-        fetchSecureCacheStorage: fetchSecureCacheStorage);
+  FetchSecureCacheStorageSpy fetchSecureCacheStorage;
+  AuthorizedHttpClientDecorator sut;
 
+  setUp(() {
+    fetchSecureCacheStorage = FetchSecureCacheStorageSpy();
+    sut = AuthorizedHttpClientDecorator(
+        fetchSecureCacheStorage: fetchSecureCacheStorage);
+  });
+
+  test('should call FetchSecureCacheStorage with correct key', () async {
     await sut.request();
 
     verify(fetchSecureCacheStorage.fetchSecure('token')).called(1);
