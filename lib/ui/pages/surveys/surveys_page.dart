@@ -13,8 +13,6 @@ class SurveysPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    presenter.loadData();
-
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -28,6 +26,7 @@ class SurveysPage extends StatelessWidget {
         presenter.isLoadingStream.listen((isLoading) {
           isLoading == true ? showLoading(context) : hideLoading(context);
         });
+        presenter.loadData();
 
         return StreamBuilder<List<SurveyViewModel>>(
           stream: presenter.surveysStream,
