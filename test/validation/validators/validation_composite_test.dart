@@ -14,17 +14,14 @@ void main() {
   FieldValidationSpy validation2;
   FieldValidationSpy validation3;
 
-  void mockValidation1(ValidationError error) {
-    when(validation1.validate(any)).thenReturn(error);
-  }
+  void mockValidation1(ValidationError error) =>
+      when(validation1.validate(any)).thenReturn(error);
 
-  void mockValidation2(ValidationError error) {
-    when(validation2.validate(any)).thenReturn(error);
-  }
+  void mockValidation2(ValidationError error) =>
+      when(validation2.validate(any)).thenReturn(error);
 
-  void mockValidation3(ValidationError error) {
-    when(validation3.validate(any)).thenReturn(error);
-  }
+  void mockValidation3(ValidationError error) =>
+      when(validation3.validate(any)).thenReturn(error);
 
   setUp(() {
     validation1 = FieldValidationSpy();

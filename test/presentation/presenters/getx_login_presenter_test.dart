@@ -31,9 +31,8 @@ void main() {
         input: anyNamed('input'),
       ));
 
-  void mockValidation({String field, ValidationError value}) {
-    mockValidationCall(field).thenReturn(value);
-  }
+  void mockValidation({String field, ValidationError value}) =>
+      mockValidationCall(field).thenReturn(value);
 
   PostExpectation mockAuthenticationCall() => when(authentication.auth(any));
 
@@ -43,16 +42,14 @@ void main() {
     );
   }
 
-  void mockAuthenticationError(DomainError error) {
-    mockAuthenticationCall().thenThrow(error);
-  }
+  void mockAuthenticationError(DomainError error) =>
+      mockAuthenticationCall().thenThrow(error);
 
   PostExpectation mockSaveCurrentAccountCall() =>
       when(saveCurrentAccount.save(any));
 
-  void mockSaveCurrentAccountError() {
-    mockSaveCurrentAccountCall().thenThrow(DomainError.unexpected);
-  }
+  void mockSaveCurrentAccountError() =>
+      mockSaveCurrentAccountCall().thenThrow(DomainError.unexpected);
 
   setUp(() {
     validation = ValidationSpy();

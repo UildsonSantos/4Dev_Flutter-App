@@ -3,5 +3,6 @@ import '../../../domain/usecases/usecases.dart';
 import '../cache/cache.dart';
 import '../factories.dart';
 
-SaveCurrentAccount makeLocalSaveCurrentAccount() =>
-    LocalSaveCurrentAccount(saveSecureCacheStorage: makeLocalStorageAdapter());
+SaveCurrentAccount makeLocalSaveCurrentAccount() => LocalSaveCurrentAccount(
+      saveSecureCacheStorage: makeLocalStorageAdapter(),
+    );

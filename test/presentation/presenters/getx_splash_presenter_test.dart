@@ -16,13 +16,11 @@ void main() {
   PostExpectation mockLoadCurrentAccountCall() =>
       when(loadCurrentAccount.load());
 
-  void mockLoadCurrentAccount({AccountEntity account}) {
-    mockLoadCurrentAccountCall().thenAnswer((_) async => account);
-  }
+  void mockLoadCurrentAccount({AccountEntity account}) =>
+      mockLoadCurrentAccountCall().thenAnswer((_) async => account);
 
-  void mockLoadCurrentAccountError() {
-    mockLoadCurrentAccountCall().thenThrow(Exception());
-  }
+  void mockLoadCurrentAccountError() =>
+      mockLoadCurrentAccountCall().thenThrow(Exception());
 
   setUp(() {
     loadCurrentAccount = LoadCurrentAccountSpy();

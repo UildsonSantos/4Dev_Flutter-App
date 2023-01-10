@@ -21,9 +21,10 @@ void main() {
 
   PostExpectation mockRequest() => when(
         httpClient.request(
-            url: anyNamed('url'),
-            method: anyNamed('method'),
-            body: anyNamed('body')),
+          url: anyNamed('url'),
+          method: anyNamed('method'),
+          body: anyNamed('body'),
+        ),
       );
 
   void mockHttpData(Map data) {

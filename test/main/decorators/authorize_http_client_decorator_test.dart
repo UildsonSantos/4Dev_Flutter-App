@@ -29,9 +29,7 @@ void main() {
     mockTokenCall().thenAnswer((_) async => token);
   }
 
-  void mockTokenError() {
-    mockTokenCall().thenThrow(Exception());
-  }
+  void mockTokenError() => mockTokenCall().thenThrow(Exception());
 
   PostExpectation mockHttpResponseCall() => when(
         httpClient.request(
@@ -47,9 +45,8 @@ void main() {
     mockHttpResponseCall().thenAnswer((_) async => httpResponse);
   }
 
-  void mockHttpResponseError(HttpError error) {
-    mockHttpResponseCall().thenThrow(error);
-  }
+  void mockHttpResponseError(HttpError error) =>
+      mockHttpResponseCall().thenThrow(error);
 
   setUp(() {
     fetchSecureCacheStorage = FetchSecureCacheStorageSpy();

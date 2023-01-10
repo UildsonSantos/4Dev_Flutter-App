@@ -22,10 +22,9 @@ void main() {
   });
 
   group('save secure', () {
-    mockSaveSecureError() {
-      when(secureStorage.write(key: anyNamed('key'), value: anyNamed('value')))
-          .thenThrow(Exception());
-    }
+    mockSaveSecureError() => when(
+            secureStorage.write(key: anyNamed('key'), value: anyNamed('value')))
+        .thenThrow(Exception());
 
     test('should call save secure with correct values', () async {
       await sut.saveSecure(key: key, value: value);
@@ -46,13 +45,9 @@ void main() {
     PostExpectation mockFetchSecureCall() =>
         when(secureStorage.read(key: anyNamed('key')));
 
-    mockFetchSecureError() {
-      mockFetchSecureCall().thenThrow(Exception());
-    }
+    mockFetchSecureError() => mockFetchSecureCall().thenThrow(Exception());
 
-    mockFetchSecure() {
-      mockFetchSecureCall().thenAnswer((_) async => value);
-    }
+    mockFetchSecure() => mockFetchSecureCall().thenAnswer((_) async => value);
 
     setUp(() {
       mockFetchSecure();

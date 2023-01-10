@@ -33,26 +33,22 @@ void main() {
         input: anyNamed('input'),
       ));
 
-  void mockValidation({String field, ValidationError value}) {
-    mockValidationCall(field).thenReturn(value);
-  }
+  void mockValidation({String field, ValidationError value}) =>
+      mockValidationCall(field).thenReturn(value);
 
   PostExpectation mockAddAccountCall() => when(addAccount.add(any));
 
-  void mockAddAccount() {
-    mockAddAccountCall().thenAnswer((_) async => AccountEntity(token: token));
-  }
+  void mockAddAccount() =>
+      mockAddAccountCall().thenAnswer((_) async => AccountEntity(token: token));
 
   PostExpectation mockSaveCurrentAccountCall() =>
       when(saveCurrentAccount.save(any));
 
-  void mockSaveCurrentAccountError() {
-    mockSaveCurrentAccountCall().thenThrow(DomainError.unexpected);
-  }
+  void mockSaveCurrentAccountError() =>
+      mockSaveCurrentAccountCall().thenThrow(DomainError.unexpected);
 
-  void mockAddAccountError(DomainError error) {
-    mockAddAccountCall().thenThrow(error);
-  }
+  void mockAddAccountError(DomainError error) =>
+      mockAddAccountCall().thenThrow(error);
 
   setUp(() {
     addAccount = AddAccountSpy();
