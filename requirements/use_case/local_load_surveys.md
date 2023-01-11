@@ -24,7 +24,7 @@
 
 > ## Exceção - Erro ao carregar dados do Cache
 
-1. Sistema limpa os dados do cache
+1. ✅ Sistema limpa os dados do cache
 
 > ## Exceção - Dados inválidos no cache
 
