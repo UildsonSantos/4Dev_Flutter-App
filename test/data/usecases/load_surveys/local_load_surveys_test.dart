@@ -8,11 +8,11 @@ import 'package:fordev/data/usecases/usecases.dart';
 import 'package:fordev/domain/entities/entities.dart';
 import 'package:fordev/domain/helpers/helpers.dart';
 
-class FetchCacheStorageSpy extends Mock implements FetchCacheStorage {}
+class CacheStorageSpy extends Mock implements CacheStorage {}
 
 void main() {
   group('load', () {
-    FetchCacheStorageSpy fetchCacheStorage;
+    CacheStorageSpy cacheStorage;
     LocalLoadSurveys sut;
     List<Map> data;
 
@@ -31,7 +31,7 @@ void main() {
           },
         ];
 
-    PostExpectation mockFetchCall() => when(fetchCacheStorage.fetch(any));
+    PostExpectation mockFetchCall() => when(cacheStorage.fetch(any));
 
     void mockFetch(List<Map> list) {
       data = list;
@@ -41,8 +41,8 @@ void main() {
     void mockFetchError() => mockFetchCall().thenThrow(Exception());
 
     setUp(() {
-      fetchCacheStorage = FetchCacheStorageSpy();
-      sut = LocalLoadSurveys(fetchCacheStorage: fetchCacheStorage);
+      cacheStorage = CacheStorageSpy();
+      sut = LocalLoadSurveys(cacheStorage: cacheStorage);
 
       mockFetch(mockValidData());
     });
