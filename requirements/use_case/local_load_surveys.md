@@ -36,12 +36,7 @@
 
 > ## Caso de sucesso
 
-1. Sistema apaga os dados do Cache antigo
-2. Sistema grava os novos dados no Cache
-
-> ## Exceção - Erro ao apagar dados do Cache
-
-1. Sistema retorna uma mensagem de erro inesperado
+1. Sistema grava os novos dados no Cache
 
 > ## Exceção - Erro ao gravar dados no Cache
 
