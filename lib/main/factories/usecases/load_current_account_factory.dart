@@ -4,5 +4,5 @@ import '../cache/cache.dart';
 import '../factories.dart';
 
 LoadCurrentAccount makeLocalLoadCurrentAccount() => LocalLoadCurrentAccount(
-      fetchSecureCacheStorage: makeLocalStorageAdapter(),
+      fetchSecureCacheStorage: makeSecureStorageAdapter(),
     );

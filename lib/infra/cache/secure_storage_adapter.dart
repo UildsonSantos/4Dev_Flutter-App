@@ -3,11 +3,11 @@ import 'package:meta/meta.dart';
 
 import '../../data/cache/cache.dart';
 
-class LocalStorageAdapter
+class SecureStorageAdapter
     implements SaveSecureCacheStorage, FetchSecureCacheStorage {
   final FlutterSecureStorage secureStorage;
 
-  LocalStorageAdapter({
+  SecureStorageAdapter({
     @required this.secureStorage,
   });
 
