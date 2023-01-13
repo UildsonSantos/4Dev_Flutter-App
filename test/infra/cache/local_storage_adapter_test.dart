@@ -71,8 +71,11 @@ void main() {
   group('fetch', () {
     String result;
 
-    void mockFetch() =>
-        when(localStorage.getItem(any)).thenAnswer((_) => result);
+    PostExpectation mockFetchCall() => when(localStorage.getItem(any));
+
+    void mockFetch() => mockFetchCall().thenAnswer((_) => result);
+
+    void mockFetchError() => mockFetchCall().thenThrow(Exception());
 
     setUp(() {
       mockFetch();
@@ -88,6 +91,14 @@ void main() {
       final data = await sut.fetch(key);
 
       expect(data, result);
+    });
+
+    test('should throw if deleteItem throws', () async {
+      mockFetchError();
+
+      final future = sut.fetch(key);
+
+      expect(future, throwsA(TypeMatcher<Exception>()));
     });
   });
 }
