@@ -1,5 +1,4 @@
 import 'package:faker/faker.dart';
-import 'package:fordev/domain/helpers/helpers.dart';
 import 'package:meta/meta.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
@@ -7,6 +6,7 @@ import 'package:test/test.dart';
 import 'package:fordev/data/usecases/usecases.dart';
 
 import 'package:fordev/domain/entities/entities.dart';
+import 'package:fordev/domain/helpers/helpers.dart';
 import 'package:fordev/domain/usecases/usecases.dart';
 
 class RemoteLoadSurveysWithLocalFallback implements LoadSurveys {
@@ -56,20 +56,23 @@ void main() {
 
   PostExpectation mockRemoteLoadCall() => when(remote.load());
 
+  PostExpectation mockLocalLoadCall() => when(local.load());
+
   void mockRemoteLoad() {
     remoteSurveys = mockSurveys();
     mockRemoteLoadCall().thenAnswer((_) async => remoteSurveys);
   }
 
-  void mockRemoteLoadError(DomainError error) =>
-      mockRemoteLoadCall().thenThrow(error);
-
-  PostExpectation mockLocalLoadCall() => when(local.load());
-
   void mockLocalLoad() {
     localSurveys = mockSurveys();
     mockLocalLoadCall().thenAnswer((_) async => localSurveys);
   }
+
+  void mockRemoteLoadError(DomainError error) =>
+      mockRemoteLoadCall().thenThrow(error);
+
+  void mockLocalLoadError() =>
+      mockLocalLoadCall().thenThrow(DomainError.unexpected);
 
   setUp(() {
     local = LocalLoadSurveysSpy();
@@ -123,5 +126,15 @@ void main() {
     final surveys = await sut.load();
 
     expect(surveys, localSurveys);
+  });
+
+  test('Should throw UnexpectedError if remote and local throws', () async {
+    mockRemoteLoadError(DomainError.unexpected);
+
+    mockLocalLoadError();
+
+    final future = sut.load();
+
+    expect(future, throwsA(DomainError.unexpected));
   });
 }
