@@ -40,7 +40,7 @@ class App extends StatelessWidget {
           transition: Transition.fadeIn,
         ),
         GetPage(
-          name: '/surveys_result/:survey_id',
+          name: '/survey_result/:survey_id',
           page: makeSurveyResultPage,
         ),
       ],

@@ -40,7 +40,7 @@ class SurveyResultPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Image.network(
-                      'http://fordevs.herokuapp.com/static/img/logo-angular.png',
+                      'https://brandslogos.com/wp-content/uploads/images/large/angular-icon-logo.png',
                       width: 40,
                     ),
                     Expanded(
