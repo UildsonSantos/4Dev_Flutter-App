@@ -96,4 +96,16 @@ void main() {
     );
     expect(find.text('Recarregar'), findsOneWidget);
   });
+
+  testWidgets('should call loadSurveyResult on reload button click',
+      (WidgetTester tester) async {
+    await loadPage(tester);
+
+    surveyResultController.addError(UIError.unexpected.description);
+    await tester.pump();
+
+    await tester.tap(find.text('Recarregar'));
+
+    verify(presenter.loadData()).called(2);
+  });
 }
