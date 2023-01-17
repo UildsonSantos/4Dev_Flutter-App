@@ -72,6 +72,7 @@ O objetivo do treinamento é mostrar como criar um aplicativo com Flutter usando
 - Flutter Secure Storage
 - LocalStorage
 - i18n
+- Image Test Utils
 
 > ## Features de Testes
 
