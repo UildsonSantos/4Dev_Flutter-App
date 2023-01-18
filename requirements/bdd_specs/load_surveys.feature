@@ -3,7 +3,7 @@ Como um cliente
 Quero poder ver todas as enquetes
 Para poder saber o resultado e poder dar minha opinião
 
-![#f03c15](Cenário): Com internet
+Cenário: Com internet
 Dado que o cliente tem conexão com a internet
 Quando solicitar para ver as enquetes
 Então o sistema deve exibir as enquetes
