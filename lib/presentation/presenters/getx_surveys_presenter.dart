@@ -7,17 +7,21 @@ import '../../domain/usecases/usecases.dart';
 import '../../ui/helpers/helpers.dart';
 import '../../ui/pages/pages.dart';
 
-class GetxSurveysPresenter implements SurveysPresenter{
+class GetxSurveysPresenter implements SurveysPresenter {
   final LoadSurveys loadSurveys;
 
   final _isLoading = true.obs;
   final _surveys = Rx<List<SurveyViewModel>>();
+  final _navigateTo = RxString();
 
   @override
   Stream<bool> get isLoadingStream => _isLoading.stream;
 
   @override
   Stream<List<SurveyViewModel>> get surveysStream => _surveys.stream;
+
+  @override
+  Stream<String> get navigateToStream => _navigateTo.stream;
 
   GetxSurveysPresenter({@required this.loadSurveys});
 
@@ -42,5 +46,10 @@ class GetxSurveysPresenter implements SurveysPresenter{
     } finally {
       _isLoading.value = false;
     }
+  }
+
+  @override
+  void goToSurveyResult(String surveyId) {
+    _navigateTo.value = '/survey_result/$surveyId';
   }
 }
