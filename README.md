@@ -74,6 +74,25 @@ O objetivo do treinamento é mostrar como criar um aplicativo com Flutter usando
 - i18n
 - Image Test Utils
 
+> ## Features do Dart/Flutter
+
+- Classes
+- Abstract Classes
+- Functions
+- Constants
+- Mixins
+- Enums
+- Exceptions
+- Futures
+- Streams
+- Constructors
+- Async/Await
+- Stateless Widgets
+- Stateful Widgets
+- Material Theme
+- Assets
+- App Icon
+
 > ## Features de Testes
 
 - Testes Unitários
