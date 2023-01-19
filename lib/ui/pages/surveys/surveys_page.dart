@@ -28,12 +28,18 @@ class SurveysPage extends StatelessWidget {
           isLoading == true ? showLoading(context) : hideLoading(context);
         });
 
-
         presenter.navigateToStream.listen((page) {
           if (page?.isNotEmpty == true) {
             Get.toNamed(page);
           }
         });
+
+        presenter.isSessionExpiredStream.listen((isExpired) {
+            if (isExpired == true) {
+              Get.offAllNamed('/login');
+            }
+          });
+
         presenter.loadData();
 
         return StreamBuilder<List<SurveyViewModel>>(

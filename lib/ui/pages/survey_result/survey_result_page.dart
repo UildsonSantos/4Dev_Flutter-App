@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../components/components.dart';
 import '../../helpers/helpers.dart';
@@ -25,6 +26,13 @@ class SurveyResultPage extends StatelessWidget {
           presenter.isLoadingStream.listen((isLoading) {
             isLoading == true ? showLoading(context) : hideLoading(context);
           });
+
+           presenter.isSessionExpiredStream.listen((isExpired) {
+            if (isExpired == true) {
+              Get.offAllNamed('/login');
+            }
+          });
+          
           presenter.loadData();
 
           return StreamBuilder<SurveyResultViewModel>(
