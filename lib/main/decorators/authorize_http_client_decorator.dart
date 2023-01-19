@@ -4,10 +4,13 @@ import '../../data/cache/cache.dart';
 import '../../data/http/http.dart';
 
 class AuthorizedHttpClientDecorator implements HttpClient {
+  DeleteSecureCacheStorage deleteSecureCacheStorage;
   FetchSecureCacheStorage fetchSecureCacheStorage;
+
   HttpClient decoratee;
 
   AuthorizedHttpClientDecorator({
+    @required this.deleteSecureCacheStorage,
     @required this.fetchSecureCacheStorage,
     @required this.decoratee,
   });
@@ -33,6 +36,7 @@ class AuthorizedHttpClientDecorator implements HttpClient {
     } on HttpError {
       rethrow;
     } catch (error) {
+      await deleteSecureCacheStorage.deleteSecure('token');
       throw HttpError.forbidden;
     }
   }
