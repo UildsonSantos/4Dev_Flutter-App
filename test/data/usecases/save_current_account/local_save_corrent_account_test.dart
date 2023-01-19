@@ -17,7 +17,7 @@ void main() {
   AccountEntity account;
 
   void mockError() {
-    when(saveSecureCacheStorage.saveSecure(
+    when(saveSecureCacheStorage.save(
       key: anyNamed('key'),
       value: anyNamed('value'),
     )).thenThrow(Exception());
@@ -36,7 +36,7 @@ void main() {
     await sut.save(account);
 
     verify(
-      saveSecureCacheStorage.saveSecure(key: 'token', value: account.token),
+      saveSecureCacheStorage.save(key: 'token', value: account.token),
     );
   });
 
