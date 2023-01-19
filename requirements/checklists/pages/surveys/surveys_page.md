@@ -11,3 +11,4 @@
 7. ✅ Mostrar em vermelho as enquetes não respondidas e em verde as respondidas pelo usuário
 8. ✅ Ir para a tela de resultado da enquete ao clicar em alguma enquete
 9. ✅ Chamar o método de Listar Enquetes ao clicar no botão de recarregar
+10. Ir para tela de login e limpar a navegação ao receber evento de sessionExpired como true
