@@ -17,7 +17,7 @@ class SurveyResultPage extends StatelessWidget
       appBar: AppBar(
         title: Center(
           child: Text(
-            R.strings.surveys,
+            R.strings.surveyResult,
             style: TextStyle(fontSize: 25),
           ),
         ),

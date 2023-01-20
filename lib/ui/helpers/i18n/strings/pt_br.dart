@@ -43,6 +43,9 @@ class PtBr implements Translations {
 
   @override
   String get surveys => 'Enquetes';
+  
+  @override
+  String get surveyResult => 'Resultado da enquete';
 
   @override
   String get wait => 'Aguarde...';
