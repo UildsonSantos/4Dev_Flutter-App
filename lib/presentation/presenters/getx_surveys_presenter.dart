@@ -8,7 +8,7 @@ import '../../ui/helpers/helpers.dart';
 import '../../ui/pages/pages.dart';
 import '../mixins/mixins.dart';
 
-class GetxSurveysPresenter
+class GetxSurveysPresenter extends GetxController
     with SessionManager, LoadingManager
     implements SurveysPresenter {
   final LoadSurveys loadSurveys;
