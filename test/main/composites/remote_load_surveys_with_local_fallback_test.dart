@@ -3,10 +3,8 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import 'package:fordev/data/usecases/usecases.dart';
-
 import 'package:fordev/domain/entities/entities.dart';
 import 'package:fordev/domain/helpers/helpers.dart';
-
 import 'package:fordev/main/composites/composites.dart';
 
 class RemoteLoadSurveysSpy extends Mock implements RemoteLoadSurveys {}
@@ -23,7 +21,7 @@ void main() {
   List<SurveyEntity> mockSurveys() => [
         SurveyEntity(
           id: faker.guid.guid(),
-          question: faker.randomGenerator.string(10),
+          question: faker.lorem.sentence(),
           dateTime: faker.date.dateTime(),
           didAnswer: faker.randomGenerator.boolean(),
         ),
@@ -52,10 +50,7 @@ void main() {
   setUp(() {
     local = LocalLoadSurveysSpy();
     remote = RemoteLoadSurveysSpy();
-    sut = RemoteLoadSurveysWithLocalFallback(
-      remote: remote,
-      local: local,
-    );
+    sut = RemoteLoadSurveysWithLocalFallback(remote: remote, local: local);
     mockRemoteLoad();
     mockLocalLoad();
   });
@@ -86,7 +81,7 @@ void main() {
     expect(future, throwsA(DomainError.accessDenied));
   });
 
-  test('Should call local fetch on remote error', () async {
+  test('Should call local load on remote error', () async {
     mockRemoteLoadError(DomainError.unexpected);
 
     await sut.load();
