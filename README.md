@@ -81,6 +81,7 @@ O objetivo do treinamento é mostrar como criar um aplicativo com Flutter usando
 - Functions
 - Constants
 - Mixins
+- Extensions
 - Enums
 - Exceptions
 - Futures
