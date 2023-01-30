@@ -185,7 +185,8 @@ void main() {
     expect(Get.currentRoute, '/survey_result/any_survey_id');
   });
 
-   testWidgets('should call save on list item click', (WidgetTester tester) async {
+  testWidgets('should call save on list item click',
+      (WidgetTester tester) async {
     await loadPage(tester);
 
     surveyResultController.add(makeSurveyResult());
@@ -195,5 +196,18 @@ void main() {
     await tester.tap(find.text('Answer 1'));
 
     verify(presenter.save(answer: 'Answer 1')).called(1);
+  });
+
+  testWidgets('should not call save on current answer click',
+      (WidgetTester tester) async {
+    await loadPage(tester);
+
+    surveyResultController.add(makeSurveyResult());
+    await provideMockedNetworkImages(() async {
+      await tester.pump();
+    });
+    await tester.tap(find.text('Answer 0'));
+
+    verifyNever(presenter.save(answer: 'Answer 0'));
   });
 }

@@ -16,9 +16,12 @@ class SurveyResult extends StatelessWidget {
         if (index == 0) {
           return SurveyHeader(question: viewModel.question);
         }
+        final answerItem = viewModel.answers[index - 1];
         return GestureDetector(
-          onTap: () => onSave(answer: viewModel.answers[index - 1].answer),
-          child: SurveyAnswer(viewModel: viewModel.answers[index - 1]),
+          onTap: () => answerItem.isCurrentAnswer
+              ? null
+              : onSave(answer: answerItem.answer),
+          child: SurveyAnswer(viewModel: answerItem),
         );
       },
       itemCount: viewModel.answers.length + 1,
