@@ -37,7 +37,10 @@ class SurveyResultPage extends StatelessWidget
                       error: snapshot.error, reload: presenter.loadData);
                 }
                 if (snapshot.hasData) {
-                  return SurveyResult(viewModel: snapshot.data);
+                  return SurveyResult(
+                    viewModel: snapshot.data,
+                    onSave: presenter.save,
+                  );
                 }
                 return SizedBox(height: 0);
               });

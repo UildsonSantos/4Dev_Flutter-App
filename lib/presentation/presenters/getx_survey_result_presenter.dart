@@ -52,4 +52,10 @@ class GetxSurveyResultPresenter extends GetxController
       isLoading = false;
     }
   }
+
+  @override
+  Future<void> save({String answer}) {
+    // TODO: implement save
+    throw UnimplementedError();
+  }
 }
