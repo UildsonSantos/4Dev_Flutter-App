@@ -107,4 +107,16 @@ void main() {
 
     await sut.loadData();
   });
+
+  test('Should go to SurveyResultPage on survey click', () async {
+    expectLater(
+        sut.navigateToStream,
+        emitsInOrder([
+          '/survey_result/any_route_id',
+          '/survey_result/any_route_id',
+        ]));
+
+    sut.goToSurveyResult('any_route_id');
+    sut.goToSurveyResult('any_route_id');
+  });
 }
