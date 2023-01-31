@@ -7,6 +7,8 @@ import 'package:fordev/domain/entities/entities.dart';
 import 'package:fordev/domain/helpers/helpers.dart';
 import 'package:fordev/main/composites/composites.dart';
 
+import '../../mocks/mocks.dart';
+
 class LocalLoadSurveyResultSpy extends Mock implements LocalLoadSurveyResult {}
 
 class RemoteLoadSurveyResultSpy extends Mock implements RemoteLoadSurveyResult {
@@ -20,22 +22,11 @@ void main() {
   SurveyResultEntity localSurveyResult;
   SurveyResultEntity remoteSurveyResult;
 
-  SurveyResultEntity mockSurveyResult() => SurveyResultEntity(
-          surveyId: faker.guid.guid(),
-          question: faker.lorem.sentence(),
-          answers: [
-            SurveyAnswerEntity(
-              answer: faker.lorem.sentence(),
-              percent: faker.randomGenerator.integer(100),
-              isCurrentAnswer: faker.randomGenerator.boolean(),
-            )
-          ]);
-
   PostExpectation mockRemoteLoadBySurveyCall() =>
       when(remote.loadBySurvey(surveyId: anyNamed('surveyId')));
 
   void mockRemoteLoadBySurvey() {
-    remoteSurveyResult = mockSurveyResult();
+    remoteSurveyResult = FakeSurveyResultFactory.makeEntity();
     mockRemoteLoadBySurveyCall().thenAnswer((_) async => remoteSurveyResult);
   }
 
@@ -46,7 +37,7 @@ void main() {
       when(local.loadBySurvey(surveyId: anyNamed('surveyId')));
 
   void mockLocalLoadBySurvey() {
-    localSurveyResult = mockSurveyResult();
+    localSurveyResult = FakeSurveyResultFactory.makeEntity();
     mockLocalLoadBySurveyCall().thenAnswer((_) async => localSurveyResult);
   }
 

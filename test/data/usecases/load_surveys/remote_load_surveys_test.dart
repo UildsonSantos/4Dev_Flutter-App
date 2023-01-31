@@ -8,6 +8,8 @@ import 'package:fordev/data/usecases/usecases.dart';
 import 'package:fordev/domain/entities/entities.dart';
 import 'package:fordev/domain/helpers/helpers.dart';
 
+import '../../../mocks/mocks.dart';
+
 class HttpClientSpy extends Mock implements HttpClient {}
 
 void main() {
@@ -15,27 +17,6 @@ void main() {
   RemoteLoadSurveys sut;
   String url;
   List<Map> listToTest;
-
-  List<Map> mockValidData() => [
-        {
-          'id': faker.guid.guid(),
-          'question': faker.randomGenerator.string(51),
-          'didAnswer': faker.randomGenerator.boolean(),
-          'date': faker.date.dateTime().toIso8601String(),
-        },
-        {
-          'id': faker.guid.guid(),
-          'question': faker.randomGenerator.string(51),
-          'didAnswer': faker.randomGenerator.boolean(),
-          'date': faker.date.dateTime().toIso8601String(),
-        },
-        {
-          'id': faker.guid.guid(),
-          'question': faker.randomGenerator.string(51),
-          'didAnswer': faker.randomGenerator.boolean(),
-          'date': faker.date.dateTime().toIso8601String(),
-        }
-      ];
 
   PostExpectation mockRequest() => when(
         httpClient.request(
@@ -56,7 +37,7 @@ void main() {
     url = faker.internet.httpUrl();
 
     sut = RemoteLoadSurveys(url: url, httpClient: httpClient);
-    mockHttpData(mockValidData());
+    mockHttpData(FakeSurveysFactory.makeApiJson());
   });
 
   test('should call HttpClient with correct values', () async {
@@ -81,12 +62,6 @@ void main() {
         dateTime: DateTime.parse(listToTest[1]['date']),
         didAnswer: listToTest[1]['didAnswer'],
       ),
-      SurveyEntity(
-        id: listToTest[2]['id'],
-        question: listToTest[2]['question'],
-        dateTime: DateTime.parse(listToTest[2]['date']),
-        didAnswer: listToTest[2]['didAnswer'],
-      )
     ];
     expect(surveys, responseSurveys);
   });
@@ -94,9 +69,7 @@ void main() {
   test(
       'should throw UnexpectedError if HttpClient returns 200 with invalid data',
       () async {
-    mockHttpData([
-      {'invalid_key': 'invalid_value'}
-    ]);
+    mockHttpData(FakeSurveysFactory.makeInvalidApiJson());
 
     final future = sut.load();
 

@@ -22,9 +22,9 @@ class LocalSurveyAnswerModel {
       throw Exception();
     }
     return LocalSurveyAnswerModel(
-      image: json['surveyId'],
-      answer: json['question'],
-      isCurrentAnswer: bool.fromEnvironment(json['isCurrentAnswer']),
+      image: json['image'],
+      answer: json['answer'],
+      isCurrentAnswer: json['isCurrentAnswer'].toLowerCase() == 'true',
       percent: int.parse(json['percent']),
     );
   }
