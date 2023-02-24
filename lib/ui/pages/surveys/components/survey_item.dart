@@ -6,7 +6,9 @@ import '../../pages.dart';
 class SurveyItem extends StatelessWidget {
   final SurveyViewModel viewModel;
 
-  SurveyItem({@required this.viewModel});
+  const SurveyItem({
+    required this.viewModel,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -11,7 +11,9 @@ class SignUpPage extends StatelessWidget
     with KeyboardManager, LoadingManager, UIErrorManager, NavigationManager {
   final SignUpPresenter presenter;
 
-  SignUpPage({@required this.presenter});
+  SignUpPage({
+    required this.presenter,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class SignUpPage extends StatelessWidget
         handleLoading(context, presenter.isLoadingStream);
         handleMainError(context, presenter.mainErrorStream);
         handleNavigation(presenter.navigateToStream, clear: true);
-        
+
         return GestureDetector(
           onTap: () => hideKeyboard(context),
           child: SingleChildScrollView(
@@ -31,7 +33,7 @@ class SignUpPage extends StatelessWidget
                 Headline1(text: R.strings.login),
                 Padding(
                   padding: const EdgeInsets.all(32),
-                  child: Provider(
+                  child: ListenableProvider(
                     create: (_) => presenter,
                     child: Form(
                       child: Column(
@@ -47,7 +49,7 @@ class SignUpPage extends StatelessWidget
                             child: PasswordConfirmationInput(),
                           ),
                           SignUpButton(),
-                          FlatButton.icon(
+                          TextButton.icon(
                             onPressed: presenter.goToLogin,
                             icon: Icon(Icons.exit_to_app),
                             label: Text(R.strings.login),

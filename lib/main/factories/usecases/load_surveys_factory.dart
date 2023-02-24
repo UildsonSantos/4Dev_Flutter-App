@@ -3,12 +3,12 @@ import '../../../domain/usecases/usecases.dart';
 import '../../composites/composites.dart';
 import '../factories.dart';
 
-LoadSurveys makeRemoteLoadSurveys() => RemoteLoadSurveys(
+RemoteLoadSurveys makeRemoteLoadSurveys() => RemoteLoadSurveys(
       url: makeApiUrl('surveys'),
       httpClient: makeAuthorizedHttpClientDecorator(),
     );
 
-LoadSurveys makeLocalLoadSurveys() =>
+LocalLoadSurveys makeLocalLoadSurveys() =>
     LocalLoadSurveys(cacheStorage: makeLocalStorageAdapter());
 
 LoadSurveys makeRemoteLoadSurveysWithLocalFallback() =>

@@ -5,7 +5,7 @@ import 'package:fordev/presentation/protocols/protocols.dart';
 import 'package:fordev/validation/validators/validators.dart';
 
 void main() {
-  RequiredFieldValidation sut;
+  late RequiredFieldValidation sut;
 
   setUp(() {
     sut = RequiredFieldValidation(field: 'any_field');

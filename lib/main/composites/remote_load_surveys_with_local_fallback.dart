@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import '../../data/usecases/usecases.dart';
 
 import '../../domain/entities/entities.dart';
@@ -11,8 +9,8 @@ class RemoteLoadSurveysWithLocalFallback implements LoadSurveys {
   final LocalLoadSurveys local;
 
   RemoteLoadSurveysWithLocalFallback({
-    @required this.remote,
-    @required this.local,
+    required this.remote,
+    required this.local,
   });
 
   @override

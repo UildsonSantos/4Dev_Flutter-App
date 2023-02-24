@@ -1,43 +1,33 @@
 import 'package:faker/faker.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
-import 'package:fordev/data/cache/cache.dart';
 import 'package:fordev/data/usecases/usecases.dart';
 
 import 'package:fordev/domain/entities/entities.dart';
 import 'package:fordev/domain/helpers/helpers.dart';
 
-class FetchSecureCacheStorageSpy extends Mock
-    implements FetchSecureCacheStorage {}
+import '../../mocks/mocks.dart';
 
 void main() {
-  FetchSecureCacheStorageSpy fetchSecureCacheStorage;
-  LocalLoadCurrentAccount sut;
-  String token;
-
-  PostExpectation mockFetchSecureCall() =>
-      when(fetchSecureCacheStorage.fetch(any));
-
-  void mockFetchSecure() =>
-      mockFetchSecureCall().thenAnswer((_) async => token);
-
-  void mockFetchSecureError() => mockFetchSecureCall().thenThrow(Exception());
+  late SecureCacheStorageSpy secureCacheStorage;
+  late LocalLoadCurrentAccount sut;
+  late String token;
 
   setUp(() {
-    fetchSecureCacheStorage = FetchSecureCacheStorageSpy();
-    sut = LocalLoadCurrentAccount(
-      fetchSecureCacheStorage: fetchSecureCacheStorage,
-    );
+    token = faker.guid.guid();    
+    secureCacheStorage = SecureCacheStorageSpy();
+    secureCacheStorage.mockFetch(token);
 
-    token = faker.guid.guid();
-    mockFetchSecure();
+    sut = LocalLoadCurrentAccount(
+      fetchSecureCacheStorage: secureCacheStorage,
+    );
   });
 
   test('should call FetchSecureCacheStorage with correct value', () async {
     await sut.load();
 
-    verify(fetchSecureCacheStorage.fetch('token'));
+    verify(() => secureCacheStorage.fetch('token'));
   });
 
   test('should return an AccountEntity', () async {
@@ -48,7 +38,15 @@ void main() {
 
   test('should throw UnexpectedError if FetchSecureCacheStorage throws',
       () async {
-    mockFetchSecureError();
+    secureCacheStorage.mockFetchError();
+    final future = sut.load();
+
+    expect(future, throwsA(DomainError.unexpected));
+  });
+
+  test('should throw UnexpectedError if FetchSecureCacheStorage returns null',
+      () async {
+    secureCacheStorage.mockFetch(null);
     final future = sut.load();
 
     expect(future, throwsA(DomainError.unexpected));

@@ -1,14 +1,16 @@
+import 'package:flutter/material.dart';
+
 import '../../helpers/helpers.dart';
 
-abstract class SignUpPresenter {
-  Stream<UIError> get nameErrorStream;
-  Stream<UIError> get emailErrorStream;
-  Stream<UIError> get passwordErrorStream;
-  Stream<UIError> get passwordConfirmationErrorStream;
-  Stream<UIError> get mainErrorStream;
+abstract class SignUpPresenter implements Listenable {
+  Stream<UIError?> get nameErrorStream;
+  Stream<UIError?> get emailErrorStream;
+  Stream<UIError?> get passwordErrorStream;
+  Stream<UIError?> get passwordConfirmationErrorStream;
+  Stream<UIError?> get mainErrorStream;
+  Stream<String?> get navigateToStream;
   Stream<bool> get isFormValidStream;
   Stream<bool> get isLoadingStream;
-  Stream<String> get navigateToStream;
 
   void validateName(String nome);
   void validateEmail(String email);

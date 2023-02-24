@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:meta/meta.dart';
 
 import '../../domain/helpers/helpers.dart';
 import '../../domain/usecases/usecases.dart';
@@ -15,26 +14,26 @@ class GetxSignUpPresenter extends GetxController
   final SaveCurrentAccount saveCurrentAccount;
   final Validation validation;
 
-  final _emailError = Rx<UIError>();
-  final _nameError = Rx<UIError>();
-  final _passwordError = Rx<UIError>();
-  final _passwordConfirmationError = Rx<UIError>();
+  final _emailError = Rx<UIError?>(null);
+  final _nameError = Rx<UIError?>(null);
+  final _passwordError = Rx<UIError?>(null);
+  final _passwordConfirmationError = Rx<UIError?>(null);
 
-  String _name;
-  String _email;
-  String _password;
-  String _passwordConfirmation;
+  String? _name;
+  String? _email;
+  String? _password;
+  String? _passwordConfirmation;
 
-  Stream<UIError> get emailErrorStream => _emailError.stream;
-  Stream<UIError> get nameErrorStream => _nameError.stream;
-  Stream<UIError> get passwordErrorStream => _passwordError.stream;
-  Stream<UIError> get passwordConfirmationErrorStream =>
+  Stream<UIError?> get emailErrorStream => _emailError.stream;
+  Stream<UIError?> get nameErrorStream => _nameError.stream;
+  Stream<UIError?> get passwordErrorStream => _passwordError.stream;
+  Stream<UIError?> get passwordConfirmationErrorStream =>
       _passwordConfirmationError.stream;
 
   GetxSignUpPresenter({
-    @required this.addAccount,
-    @required this.validation,
-    @required this.saveCurrentAccount,
+    required this.addAccount,
+    required this.validation,
+    required this.saveCurrentAccount,
   });
 
   void validateEmail(String email) {
@@ -61,7 +60,7 @@ class GetxSignUpPresenter extends GetxController
     _validateForm();
   }
 
-  UIError _validateField(String field) {
+  UIError? _validateField(String field) {
     final formData = {
       'email': _email,
       'name': _name,
@@ -96,10 +95,10 @@ class GetxSignUpPresenter extends GetxController
       isLoading = true;
       final account = await addAccount.add(
         AddAccountParams(
-          email: _email,
-          name: _name,
-          password: _password,
-          passwordConfirmation: _passwordConfirmation,
+          email: _email!,
+          name: _name!,
+          password: _password!,
+          passwordConfirmation: _passwordConfirmation!,
         ),
       );
       await saveCurrentAccount.save(account);

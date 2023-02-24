@@ -11,7 +11,9 @@ import 'components/components.dart';
 class SurveysPage extends StatefulWidget {
   final SurveysPresenter presenter;
 
-  SurveysPage({@required this.presenter});
+  SurveysPage({
+    required this.presenter,
+  });
 
   @override
   _SurveysPageState createState() => _SurveysPageState();
@@ -22,7 +24,7 @@ class _SurveysPageState extends State<SurveysPage>
   @override
   Widget build(BuildContext context) {
     final routeObserver = Get.find<RouteObserver>();
-    routeObserver.subscribe(this, ModalRoute.of(context));
+    routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute);
 
     return Scaffold(
       appBar: AppBar(
@@ -45,15 +47,15 @@ class _SurveysPageState extends State<SurveysPage>
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return ReloadScreen(
-                error: snapshot.error,
+                error: '${snapshot.error}',
                 reload: widget.presenter.loadData,
               );
             }
             if (snapshot.hasData) {
-              return Provider(
+              return ListenableProvider(
                 create: (_) => widget.presenter,
                 child: SurveyItems(
-                  viewModel: snapshot.data,
+                  viewModel: snapshot.data!,
                 ),
               );
             }

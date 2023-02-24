@@ -1,15 +1,15 @@
-import 'package:meta/meta.dart';
-
 import '../../presentation/protocols/protocols.dart';
 import '../../validation/protocols/protocols.dart';
 
 class ValidationComposite implements Validation {
   final List<FieldValidation> validations;
 
-  ValidationComposite({@required this.validations});
+  ValidationComposite({
+    required this.validations,
+  });
 
-  ValidationError validate({@required String field, @required Map input}) {
-    ValidationError error;
+  ValidationError? validate({required String field, required Map input}) {
+    ValidationError? error;
     for (final validation
         in validations.where((inValidation) => inValidation.field == field)) {
       error = validation.validate(input);

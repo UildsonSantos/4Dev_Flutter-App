@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import '../../../domain/entities/entities.dart';
 import '../../../domain/helpers/helpers.dart';
 import '../../../domain/usecases/usecases.dart';
@@ -10,11 +8,11 @@ class LocalLoadSurveyResult implements LoadSurveyResult {
   final CacheStorage cacheStorage;
 
   LocalLoadSurveyResult({
-    @required this.cacheStorage,
+    required this.cacheStorage,
   });
 
   @override
-  Future<SurveyResultEntity> loadBySurvey({String surveyId}) async {
+  Future<SurveyResultEntity> loadBySurvey({required String surveyId}) async {
     try {
       final data = await cacheStorage.fetch('survey_result/$surveyId');
       if (data?.isEmpty != false) {
@@ -35,7 +33,7 @@ class LocalLoadSurveyResult implements LoadSurveyResult {
     }
   }
 
-  Future<void> save({@required SurveyResultEntity surveyResult}) async {
+  Future<void> save({required SurveyResultEntity surveyResult}) async {
     try {
       final json = LocalSurveyResultModel.fromEntity(surveyResult).toJson();
       await cacheStorage.save(

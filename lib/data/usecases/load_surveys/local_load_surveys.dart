@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import '../../../domain/entities/entities.dart';
 import '../../../domain/helpers/helpers.dart';
 import '../../../domain/usecases/usecases.dart';
@@ -10,7 +8,7 @@ class LocalLoadSurveys implements LoadSurveys {
   final CacheStorage cacheStorage;
 
   LocalLoadSurveys({
-    @required this.cacheStorage,
+    required this.cacheStorage,
   });
 
   @override
@@ -38,7 +36,7 @@ class LocalLoadSurveys implements LoadSurveys {
   Future<void> save(List<SurveyEntity> surveys) async {
     try {
       await cacheStorage.save(key: 'surveys', value: _mapToJson(surveys));
-    }  catch (error) {
+    } catch (error) {
       throw DomainError.unexpected;
     }
   }

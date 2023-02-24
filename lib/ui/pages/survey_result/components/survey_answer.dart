@@ -7,7 +7,7 @@ class SurveyAnswer extends StatelessWidget {
   final SurveyAnswerViewModel viewModel;
 
   const SurveyAnswer({
-    @required this.viewModel,
+    required this.viewModel,
   });
 
   @override
@@ -49,12 +49,7 @@ class SurveyAnswer extends StatelessWidget {
       viewModel.isCurrentAnswer ? ActiveIcon() : DisabledIcon()
     ];
     if (viewModel.image != null) {
-      children.insert(
-          0,
-          Image.network(
-            viewModel.image,
-            width: 40,
-          ));
+      children.insert(0, Image.network(viewModel.image!, width: 40));
     }
     return children;
   }

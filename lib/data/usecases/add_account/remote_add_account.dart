@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import '../../../domain/entities/entities.dart';
 import '../../../domain/helpers/helpers.dart';
 import '../../../domain/usecases/usecases.dart';
@@ -11,8 +9,8 @@ class RemoteAddAccount implements AddAccount {
   final String url;
 
   RemoteAddAccount({
-    @required this.httpClient,
-    @required this.url,
+    required this.httpClient,
+    required this.url,
   });
 
   @override
@@ -38,10 +36,10 @@ class RemoteAddAccountParams {
   final String passwordConfirmation;
 
   RemoteAddAccountParams({
-    @required this.name,
-    @required this.passwordConfirmation,
-    @required this.email,
-    @required this.password,
+    required this.name,
+    required this.passwordConfirmation,
+    required this.email,
+    required this.password,
   });
 
   factory RemoteAddAccountParams.fromDomain(AddAccountParams params) =>

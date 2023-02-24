@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import '../../domain/entities/entities.dart';
 import '../http/http.dart';
 
@@ -10,14 +8,16 @@ class RemoteSurveyModel {
   final bool didAnswer;
 
   RemoteSurveyModel({
-    @required this.id,
-    @required this.question,
-    @required this.date,
-    @required this.didAnswer,
+    required this.id,
+    required this.question,
+    required this.date,
+    required this.didAnswer,
   });
 
   factory RemoteSurveyModel.fromJson(Map json) {
-    if (!json.keys.toSet().containsAll(['id', 'question', 'date', 'didAnswer'])){
+    if (!json.keys
+        .toSet()
+        .containsAll(['id', 'question', 'date', 'didAnswer'])) {
       throw HttpError.invalidData;
     }
     return RemoteSurveyModel(

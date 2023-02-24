@@ -5,5 +5,6 @@ import '../../../../ui/pages/pages.dart';
 import '../../factories.dart';
 
 Widget makeSurveyResultPage() => SurveyResultPage(
-      presenter: makeGetxSurveyResultPresenter(Get.parameters['survey_id']),
+      presenter:
+          makeGetxSurveyResultPresenter(Get.parameters['survey_id'] ?? ''),
     );
